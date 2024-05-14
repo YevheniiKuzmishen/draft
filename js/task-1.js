@@ -1,26 +1,25 @@
-const books = [
-  {
-    title: "The Last Kingdom",
-    author: "Bernard Cornwell",
-    rating: 8.38,
-  },
-  {
-    title: "Beside Still Waters",
-    author: "Robert Sheckley",
-    rating: 8.51,
-  },
-];
+const makePromise = ({ value, delay, shouldResolve = true }) => {
+  return new Promise((resolve, reject) => {
+	   setTimeout(() => {
+				if(shouldResolve) {
+					resolve(value)
+				} else {
+					reject(value)
+				}
+			}, delay);
+  });
+};
 
-// for (const book of books) {
-//   console.log(book.title);
-//   console.log(book.author);
-//   console.log(book.rating);
-// }
+makePromise({ value: "A", delay: 1000 })
+	.then(value => console.log(value)) // "A"
+	.catch(error => console.log(error));
 
-for (const book of books) {
-  const { title, author, rating } = book;
+makePromise({ value: "B", delay: 3000 })
+	.then(value => console.log(value)) // "B"
+	.catch(error => console.log(error));
 
-  console.log(title);
-  console.log(author);
-  console.log(rating);
-}   
+makePromise({ value: "C", delay: 2000, shouldResolve: false })
+	.then(value => console.log(value)) 
+	.catch(error => console.log(error)); // "C"
+
+
