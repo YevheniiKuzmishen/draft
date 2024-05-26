@@ -1,25 +1,13 @@
-const makePromise = ({ value, delay, shouldResolve = true }) => {
-  return new Promise((resolve, reject) => {
-	   setTimeout(() => {
-				if(shouldResolve) {
-					resolve(value)
-				} else {
-					reject(value)
-				}
-			}, delay);
-  });
-};
+const players = [
+  { name: "Mango", playtime: 1270, gamesPlayed: 4 },
+  { name: "Poly", playtime: 469, gamesPlayed: 2 },
+  { name: "Ajax", playtime: 690, gamesPlayed: 3 },
+  { name: "Kiwi", playtime: 241, gamesPlayed: 1 },
+];
 
-makePromise({ value: "A", delay: 1000 })
-	.then(value => console.log(value)) // "A"
-	.catch(error => console.log(error));
+const totalAveragePlaytimePerGame = players.reduce((acc, player) => {
+  return acc + (player.playtime / player.gamesPlayed)
+}, 0);
 
-makePromise({ value: "B", delay: 3000 })
-	.then(value => console.log(value)) // "B"
-	.catch(error => console.log(error));
-
-makePromise({ value: "C", delay: 2000, shouldResolve: false })
-	.then(value => console.log(value)) 
-	.catch(error => console.log(error)); // "C"
-
+console.log(totalAveragePlaytimePerGame);
 
